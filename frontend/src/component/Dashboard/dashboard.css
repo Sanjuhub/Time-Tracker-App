@@ -1,0 +1,60 @@
+.QuestionsDiv {
+  height: calc(100% - 150px);
+  display: flex;
+}
+.QustionsGroups {
+  width: 50%;
+  height: 100%;
+  margin: 1.5rem 0.5rem 1rem 0.5rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(128, 128, 128, 0.829);
+}
+.QustionsGroups121 {
+  width: 60%;
+  height: 100%;
+  margin: 1.5rem 0.5rem 1rem 0.5rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(128, 128, 128, 0.829);
+}
+
+.container-top {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.container-sec {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.box {
+  margin: 10px;
+  /* background: rgb(214, 88, 88); */
+  width: 50%;
+  height: 100%;
+}
+
+.btn-char {
+  width: 50px;
+}
+
+.box-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* margin: 10px; */
+  padding: 10px;
+  background: rgb(199, 216, 105);
+}
+
+.table {
+  overflow: scroll;
+  height: 300px;
+}

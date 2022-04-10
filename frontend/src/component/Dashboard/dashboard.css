@@ -1,24 +1,3 @@
-.QuestionsDiv {
-  height: calc(100% - 150px);
-  display: flex;
-}
-.QustionsGroups {
-  width: 50%;
-  height: 100%;
-  margin: 1.5rem 0.5rem 1rem 0.5rem;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(128, 128, 128, 0.829);
-}
-.QustionsGroups121 {
-  width: 60%;
-  height: 100%;
-  margin: 1.5rem 0.5rem 1rem 0.5rem;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(128, 128, 128, 0.829);
-}
-
 .container-top {
   display: flex;
   height: 100vh;
@@ -43,6 +22,7 @@
 
 .btn-char {
   width: 50px;
+  background-color: #e96767 !important;
 }
 
 .box-header {
@@ -51,10 +31,18 @@
   justify-content: space-between;
   /* margin: 10px; */
   padding: 10px;
-  background: rgb(199, 216, 105);
+  background: rgb(38, 146, 209);
 }
 
 .table {
   overflow: scroll;
-  height: 300px;
+  height: 350px;
+}
+
+.pd-3 {
+  height: 2px;
+}
+
+.error-text {
+  color: #e96767;
 }

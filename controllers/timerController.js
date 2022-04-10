@@ -39,4 +39,37 @@ async function createTimer(req, res) {
   }
 }
 
-module.exports = { createTimer };
+async function getTimer(req, res) {
+  try {
+    const taskData = await TimerModel.find({})
+      .populate({ path: 'taskId' })
+      .populate({ path: 'authorId' }); //, select: ['_id', 'seriesName']
+    return res.json(taskData);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+}
+
+async function updateTime(req, res) {
+  const { timerId } = req.params;
+  const { time } = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(timerId)) {
+    return res.status(422).json('Invalid task Id');
+  }
+
+  try {
+    const updatedTimer = await TimerModel.findByIdAndUpdate(
+      {
+        _id: timerId,
+      },
+      { time },
+      { new: true }
+    );
+    return res.json(updatedTimer);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+}
+
+module.exports = { createTimer, getTimer, updateTime };

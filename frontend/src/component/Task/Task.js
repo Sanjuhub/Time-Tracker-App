@@ -1,37 +1,30 @@
 import { useState, useEffect } from 'react';
 import { Button, Table, InputGroup } from 'react-bootstrap';
 import { BsSearch } from 'react-icons/bs';
-import { getAuthor } from '../../services/authorService';
-import AuthorModal from './AuthorModal';
+import { getTask } from '../../services/taskService';
 
-export default function Author() {
+export default function Task() {
   const [sortOrder, setsortOrder] = useState('ASC');
-  const [authorList, setAuthorList] = useState([]);
+  const [taskList, setTaskList] = useState([]);
 
   useEffect(() => {
-    getAuthor()
+    getTask()
       .then((res) => {
-        setAuthorList(res.data);
+        setTaskList(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  const renderAuthor = (author, index) => {
+  const renderAuthor = (task, index) => {
     return (
-      <tr key={index} className='pd-3'>
+      <tr key={index}>
         <td>{index + 1}</td>
-        <td>{author.name}</td>
-        <td>{author.email}</td>
+        <td>{task.name}</td>
+        <td>{task.description}</td>
         <td>
-          <Button
-            variant='primary'
-            size='sm'
-            onClick={() => {
-              <AuthorModal />;
-            }}
-          >
+          <Button variant='primary' size='sm'>
             Edit
           </Button>{' '}
         </td>
@@ -48,17 +41,17 @@ export default function Author() {
   const sorting = (col) => {
     console.log(col);
     if (sortOrder === 'ASC') {
-      const sorted = [...authorList].sort((a, b) =>
+      const sorted = [...taskList].sort((a, b) =>
         a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1
       );
-      setAuthorList(sorted);
+      setTaskList(sorted);
       setsortOrder('DSC');
     }
     if (sortOrder === 'DSC') {
-      const sorted = [...authorList].sort((a, b) =>
+      const sorted = [...taskList].sort((a, b) =>
         a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1
       );
-      setAuthorList(sorted);
+      setTaskList(sorted);
       setsortOrder('ASC');
     }
   };
@@ -70,7 +63,7 @@ export default function Author() {
         <InputGroup></InputGroup>
       </div>
       <div className='table'>
-        <Table striped bordered hover size='sm'>
+        <Table striped bordered hover>
           <thead>
             <tr>
               <th>#</th>
@@ -83,16 +76,16 @@ export default function Author() {
               </th>
               <th
                 onClick={() => {
-                  sorting('email');
+                  sorting('description');
                 }}
               >
-                Email
+                Description
               </th>
               <th></th>
               <th></th>
             </tr>
           </thead>
-          <tbody>{authorList.map(renderAuthor)}</tbody>
+          <tbody>{taskList.map(renderAuthor)}</tbody>
         </Table>
       </div>
     </>

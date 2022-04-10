@@ -7,6 +7,7 @@ const app = express();
 
 const authorRoutes = require('./routes/authorRoutes');
 const taskRoutes = require('./routes/taskRoutes');
+const timerRoutes = require('./routes/timerRoutes');
 
 //MongoDb connection
 try {
@@ -35,5 +36,6 @@ app.use(express.json());
 
 app.use(authorRoutes);
 app.use(taskRoutes);
+app.use(timerRoutes);
 
 app.listen(process.env.PORT);

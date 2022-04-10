@@ -1,4 +1,5 @@
 const AuthorModel = require('../models/authorModel');
+const TimerModel = require('../models/timerModel');
 const mongoose = require('mongoose');
 
 async function getAuthor(req, res) {
@@ -65,6 +66,32 @@ async function updateAuthor(req, res) {
   }
 }
 
-async function deleteAuthor(req, res) {}
+async function deleteAuthor(req, res) {
+  const { authorId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(authorId)) {
+    return res.status(422).json({ message: 'Invalid author Id' });
+  }
+
+  const existingAuthor = await AuthorModel.findById({
+    _id: authorId,
+  });
+
+  if (!existingAuthor) {
+    return res.status(404).json('Author not found with the given id');
+  }
+
+  const timerEx = await TimerModel.findOne({ authorId });
+  if (timerEx) {
+    return res.json('Author associated with timer, not allowed to delete.');
+  }
+
+  AuthorModel.findOneAndDelete({ _id: authorId }, (err, doc) => {
+    if (err) {
+      return res.json(err);
+    }
+    return res.json({ message: 'Author deleted successfully' });
+  });
+}
 
 module.exports = { getAuthor, createAuthor, updateAuthor, deleteAuthor };

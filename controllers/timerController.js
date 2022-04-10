@@ -72,4 +72,27 @@ async function updateTime(req, res) {
   }
 }
 
-module.exports = { createTimer, getTimer, updateTime };
+async function deleteTimer(req, res) {
+  const { timerId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(timerId)) {
+    return res.status(422).json({ message: 'Invalid timer Id' });
+  }
+
+  const existingTimer = await TimerModel.findById({
+    _id: timerId,
+  });
+
+  if (!existingTimer) {
+    return res.status(404).json('Timer not found with the given id');
+  }
+
+  TimerModel.findOneAndDelete({ _id: timerId }, (err, doc) => {
+    if (err) {
+      return res.json(err);
+    }
+    return res.json({ message: 'Timer deleted successfully' });
+  });
+}
+
+module.exports = { createTimer, getTimer, updateTime, deleteTimer };

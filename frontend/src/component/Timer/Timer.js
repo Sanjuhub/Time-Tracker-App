@@ -54,7 +54,6 @@ export default function Timer() {
       toggle();
     } else {
       let time = minute + second;
-      console.log(time);
       toggle();
     }
   };
@@ -67,7 +66,6 @@ export default function Timer() {
         <td>{timer.authorId.name}</td>
         <td>{timer.taskId.name}</td>
         <td>
-          {console.log(timer.time.slice(0, 2))}
           <span>{timer.time.slice(0, 2)}</span>:
           <span>{timer.time.slice(2, 4)}</span>
         </td>
@@ -77,13 +75,7 @@ export default function Timer() {
           </Button>{' '}
         </td>
         <td>
-          <Button
-            variant='primary'
-            size='sm'
-            // onClick={() => {
-            //   <AuthorModal />;
-            // }}
-          >
+          <Button variant='primary' size='sm'>
             Edit
           </Button>{' '}
         </td>
@@ -106,20 +98,8 @@ export default function Timer() {
           <thead>
             <tr>
               <th>#</th>
-              <th
-              // onClick={() => {
-              //   sorting('name');
-              // }}
-              >
-                Name
-              </th>
-              <th
-              // onClick={() => {
-              //   sorting('email');
-              // }}
-              >
-                Author Name
-              </th>
+              <th>Name</th>
+              <th>Author Name</th>
               <th>Task Name</th>
               <th></th>
             </tr>
